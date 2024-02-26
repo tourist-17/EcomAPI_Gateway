@@ -19,12 +19,15 @@ app.use("/orderservice", async (req, res, next) => {
 
   try {
     // console.log(req.headers["userid"]);
-    const response = await axios.get("http://localhost:3003/api/v1/isAuthenticated", {
-      headers: {
-        userid: "1",
-        "x-access-token": req.headers["x-access-token"],
-      },
-    });
+    const response = await axios.get(
+      "http://localhost:3003/api/v1/isAuthenticated",
+      {
+        headers: {
+          userid: "1",
+          "x-access-token": req.headers["x-access-token"],
+        },
+      }
+    );
     // console.log(response.data);
     if (response.data) {
       next();
