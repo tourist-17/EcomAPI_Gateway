@@ -18,16 +18,14 @@ app.use("/orderservice", async (req, res, next) => {
   //   console.log(req.headers["x-access-token"]);
 
   try {
-    // console.log(req.query["userid"]);
-    const response = await axios.get(
-      "http://localhost:3003/api/v1/isauthenticated",
-      {
-        headers: {
-          "x-access-token": req.headers["x-access-token"],
-        },
-      }
-    );
-
+    // console.log(req.headers["userid"]);
+    const response = await axios.get("http://localhost:3003/api/v1/isAuthenticated", {
+      headers: {
+        userid: "1",
+        "x-access-token": req.headers["x-access-token"],
+      },
+    });
+    // console.log(response.data);
     if (response.data) {
       next();
     } else {
@@ -48,7 +46,8 @@ app.use(
     changeOrigin: true,
   })
 );
-app.get("/info", (req, res) => {
+
+app.get("/api/v1/info", async (req, res) => {
   return res.json({ message: "OK" });
 });
 
